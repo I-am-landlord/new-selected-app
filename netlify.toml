@@ -1,0 +1,53 @@
+# netlify.toml - Конфігураційний файл для Netlify
+
+[build]
+  # Папка з функціями
+  functions = "netlify/functions"
+  # Папка для публікації (корінь проекту)
+  publish = "."
+  # Команда для збірки (не потрібна для статичного сайту)
+  command = "echo 'No build step required'"
+
+# Налаштування для функцій
+[functions]
+  # Використовуємо esbuild для швидшої збірки функцій
+  node_bundler = "esbuild"
+
+# Налаштування заголовків для CORS
+[[headers]]
+  # Застосовуємо до всіх API маршрутів
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Access-Control-Max-Age = "86400"
+
+# Додаткові заголовки безпеки для основного сайту
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Налаштування редіректів (якщо потрібно)
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Налаштування для SPA (Single Page Application)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = ["admin"], Country = ["US"]}
+
+# Налаштування змінних середовища (опціонально)
+[context.production.environment]
+  NODE_ENV = "production"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "development"

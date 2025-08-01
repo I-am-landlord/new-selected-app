@@ -1,0 +1,37 @@
+{
+  "name": "team-selector-app",
+  "version": "1.0.0",
+  "description": "Програма для вибору команди з обмеженням кількості учасників до 30 на команду",
+  "main": "index.html",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'Статичний сайт не потребує збірки'",
+    "deploy": "netlify deploy",
+    "deploy:prod": "netlify deploy --prod",
+    "functions:serve": "netlify functions:serve",
+    "test": "echo 'Тести не налаштовані' && exit 0"
+  },
+  "keywords": [
+    "team-selector",
+    "netlify",
+    "serverless",
+    "ukraine",
+    "команди"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/team-selector.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/team-selector/issues"
+  },
+  "homepage": "https://your-team-selector.netlify.app"
+}
